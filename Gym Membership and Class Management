@@ -1,0 +1,31 @@
+## Aoa Everyone 👋
+
+
+<!--
+**shayan-mir002/shayan-mir002** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+
+
+### User-Friendly Interface
+- Clean and modern frontend built with **HTML** and **CSS**.
+- Responsive design for seamless use on mobile devices.
+
+### Secure and Dynamic Backend
+- Built with **PHP** to handle server-side processing.
+- Secure data handling with validation and prepared statements.
+
+---
+
+## Technologies Used
+
+- **Frontend**: HTML, CSS
+- **Backend**: PHP
+- **Database**: MySQL
+
+---
+
+## Installation Instructions
+
+### Prerequisites
+1. Install a web server (e.g., [XAMPP](https://www.apachefriends.org/index.html) or [WAMP](https://www.wampserver.com/)).
+2. Set up **PHP** and **MySQL** on your local environment.
+
