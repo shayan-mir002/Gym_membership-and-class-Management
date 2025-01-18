@@ -22,7 +22,7 @@ if (!isset($_SESSION['user_name'])) {
 }
 
 // Fetch members from the database (linked to member.php)
-$membersQuery = "SELECT Name FROM members ORDER BY Name ASC";
+$membersQuery = "SELECT memberID, Name FROM members ORDER BY Name ASC";
 $membersResult = $conn->query($membersQuery);
 
 // Mark attendance
@@ -32,23 +32,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mark_attendance'])) {
     $attendance = $_POST['attendance'];
     $date = $_POST['date'];
 
-    $insertQuery = "INSERT INTO attendance (member_id, class_name, attendance_status, date) 
-                    SELECT Name, ?, ?, ? 
-                    FROM members WHERE Name = ?";
-    $stmt = $conn->prepare($insertQuery);
-    $stmt->bind_param("ssss", $class, $attendance, $date, $member_name);
+    // Fetch the memberID based on the selected member name
+    $memberIdQuery = "SELECT memberID FROM members WHERE Name = ?";
+    $stmt = $conn->prepare($memberIdQuery);
+    $stmt->bind_param("s", $member_name);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    if ($stmt->execute()) {
-        $message = "Attendance marked successfully.";
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $member_id = $row['memberID'];
+
+        // Insert attendance using the fetched memberID
+        $insertQuery = "INSERT INTO attendance (member_id, class_name, attendance_status, date) VALUES (?, ?, ?, ?)";
+        $stmt = $conn->prepare($insertQuery);
+        $stmt->bind_param("isss", $member_id, $class, $attendance, $date);
+
+        if ($stmt->execute()) {
+            $message = "Attendance marked successfully.";
+        } else {
+            $message = "Failed to mark attendance.";
+        }
     } else {
-        $message = "Failed to mark attendance.";
+        $message = "Member not found.";
     }
 }
 
 // Fetch attendance records
 $attendanceQuery = "SELECT members.Name AS member_name, attendance.class_name, attendance.attendance_status, attendance.date 
     FROM attendance 
-    JOIN members ON attendance.member_id = members.Name 
+    JOIN members ON attendance.member_id = members.memberID 
     ORDER BY attendance.date DESC";
 $attendanceResult = $conn->query($attendanceQuery);
 ?>
