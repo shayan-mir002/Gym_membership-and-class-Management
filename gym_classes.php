@@ -215,7 +215,7 @@ if (!isset($_SESSION['user_name'])) {
     </div>
 
     <footer>
-        <p>&copy; 2024 Gym Membership and Class Management. All rights reserved.</p>
+        <p>&copy; 2025 Gym Membership and Class Management. All rights reserved.</p>
     </footer>
 
     <?php
