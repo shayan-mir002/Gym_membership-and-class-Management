@@ -230,9 +230,11 @@ $attendanceResult = $conn->query($attendanceQuery);
 
                 <label for="class">Select Class</label>
                 <select id="class" name="class" required>
-                    <option value="Morning Yoga">Morning Yoga</option>
-                    <option value="Weightlifting Basics">Weightlifting Basics</option>
-                    <option value="Cardio Blast">Cardio Blast</option>
+                    <option value="Yoga Basics">Yoga Basics</option>
+                    <option value="HIIT Workout">HIIT Workout</option>
+                    <option value="Strength Training">Strength Training</option>
+                    <option value="Cardio">Cardio</option>
+                    <option value="Gymnastics">Gymnastics</option>
                 </select>
 
                 <label for="attendance">Attendance</label>
